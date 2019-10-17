@@ -39,8 +39,8 @@ Thumbs.db
 
 .idea/$PRODUCT_WORKSPACE_FILE$
 
-Les4-Singleton-Simple-Factory-en-Enum.iml
+Labo4b.iml
 
-.idea/Les4-Singleton-Simple-Factory-en-Enum.iml
+.idea/Labo4b.iml
 
 out/production/Labo4/domain/db/products.json
