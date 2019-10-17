@@ -13,7 +13,6 @@ public class ScoreView {
 	public ScoreView(){
 		scoreLabel = new Label();
 		scoreLabel.setStyle("-fx-font-family: \"Courier new\"; -fx-font-size: 12; -fx-text-fill: darkred;");
-
 		layoutComponents();
 		stage.setScene(scoreScene);
 		stage.setTitle("Overzicht scores");

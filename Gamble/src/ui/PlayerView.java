@@ -15,20 +15,20 @@ public class PlayerView  {
 	private Button playButton; 
 	private Label messageLabel; 
 	
-	private int spelerNummer;
+	private int playerid;
 	
-	public PlayerView(int spelerNummer){
-		this.spelerNummer = spelerNummer;
-		diceLabel = new Label("beurt 1: ");
-		playButton = new Button("Werp dobbelstenen");
+	public PlayerView(int playerid){
+		this.playerid = playerid;
+		diceLabel = new Label("turn 1: ");
+		playButton = new Button("throw dice");
 		playButton.setOnAction(new ThrowDicesHandler());
 		playButton.setDisable(true);
-		messageLabel = new Label("Spel nog niet gestart");
+		messageLabel = new Label("game not yet started");
 		layoutComponents();
 		stage.setScene(playerScene);
-		stage.setTitle("Speler "+spelerNummer);
+		stage.setTitle("Player "+playerid);
 		stage.setResizable(false);		
-		stage.setX(100+(spelerNummer-1) * 350);
+		stage.setX(100+(playerid-1) * 350);
 		stage.setY(200);
 		stage.show();
 	}
@@ -41,14 +41,14 @@ public class PlayerView  {
 		root.getChildren().add(messageLabel);			
 	}
 	
-	public void isAanBeurt(boolean aanBeurt){
-		playButton.setDisable(!aanBeurt);		
+	public void isCurrentPlayer(boolean turn){
+		playButton.setDisable(!turn);
 	}
 	
 	class ThrowDicesHandler implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
-            
+            //TODO add buton logic
         }
     }
 }
