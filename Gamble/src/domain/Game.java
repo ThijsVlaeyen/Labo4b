@@ -74,7 +74,7 @@ public class Game implements Subject{
             setTurn();
             notifyObserver(EventType.PLAYERVIEW, t.toString());
         }else{
-            System.out.println("already played 4 rounds - game over");
+            endGame();
         }
 //        currentPlayer = players.get(playerId);
 //        List<Integer> thrownDices = dice.throwDices(2);
@@ -122,6 +122,23 @@ public class Game implements Subject{
     }
 
     public void endGame() {
+        notifyObserver(EventType.SCOREVIEW,"Game over "  + getWinningPlayer());
+    }
 
+    private String getWinningPlayer() {
+        int max = 0;
+        int som =0;
+        Player p = null;
+        for (Map.Entry<Player,List<Turn>> entry:this.turns.entrySet()) {
+            som = 0;
+            for (Turn t:entry.getValue()) {
+                som+=t.getScore();
+            }
+            if (max<som){
+                p = entry.getKey();
+                max = som;
+            }
+        }
+        return " de winnaar is " + p.toString() + " met een score van " + max;
     }
 }
