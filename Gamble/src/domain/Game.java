@@ -1,24 +1,35 @@
 package domain;
 
+import javax.swing.plaf.basic.BasicScrollPaneUI;
+import java.lang.reflect.GenericDeclaration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Game implements Subject{
-    private Map<Player, List<Turn>> players;
+    private Map<Integer, Player> players;
+    private Map<Player, List<Turn>> turns;
     private Map<EventType, List<Observer>> observers;
     private Dice dice;
     List<Integer> dices;
+    List<Turn> listOfTurns;
+    Player currentPlayer;
+    int turnNumber;
+    int previousScore;
 
     public Game() {
-        players = new HashMap<Player, List<Turn>>();
+        players = new HashMap<Integer, Player>();
+        turns = new HashMap<Player, List<Turn>>();
         observers = new HashMap<EventType, List<Observer>>();
         dice = new Dice();
+        turnNumber = 0;
+        listOfTurns = new ArrayList<>();
     }
 
     public void addPlayer(Player p) {
-        players.put(p, new ArrayList<Turn>());
+        players.put(p.getPlayerId(), p);
+        turns.put(p, new ArrayList<Turn>());
     }
 
     @Override
@@ -38,10 +49,20 @@ public class Game implements Subject{
         }
     }
 
-    public void startGame() {
-        for (int i=0; i<4; i++) {
-            for (Player player : players.keySet())
-                dices = dice.throwDices(2);
-        }
+    public void step(int playerId) {
+        currentPlayer = players.get(playerId);
+        List<Integer> thrownDices = dice.throwDices(2);
+        listOfTurns = turns.get(currentPlayer);
+        if (listOfTurns.size() == 0) previousScore = 0;
+        else previousScore = listOfTurns.get(turnNumber-1).getScore();
+        listOfTurns.add(new Turn(thrownDices.get(0), thrownDices.get(1), previousScore));
+        turns.put(currentPlayer, listOfTurns);
+        //turnNumber++;
+        //if(turnNumber < 4) endGame();
+        //else endGame();
+    }
+
+    public void endGame() {
+
     }
 }

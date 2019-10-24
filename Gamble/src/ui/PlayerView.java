@@ -1,5 +1,6 @@
 package ui;
 
+import domain.Game;
 import domain.Observer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,12 +15,14 @@ public class PlayerView implements Observer {
 	private Scene playerScene;
 	private Label diceLabel; 
 	private Button playButton; 
-	private Label messageLabel; 
+	private Label messageLabel;
+	private Game game;
 	
 	private int playerid;
 	
-	public PlayerView(int playerid){
+	public PlayerView(int playerid, Game game){
 		this.playerid = playerid;
+		this.game = game;
 		diceLabel = new Label("turn 1: ");
 		playButton = new Button("throw dice");
 		playButton.setOnAction(new ThrowDicesHandler());
@@ -58,7 +61,8 @@ public class PlayerView implements Observer {
 	class ThrowDicesHandler implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
-            //TODO add buton logic
+            game.step(playerid);
+            isCurrentPlayer(false);
         }
     }
 }
