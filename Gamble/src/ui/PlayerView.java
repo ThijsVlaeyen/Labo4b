@@ -55,9 +55,13 @@ public class PlayerView implements Observer {
 
 	@Override
 	public void update(String s) {
-		setMessageLabel(s);
-		isCurrentPlayer(game.getPlayers().get(this.playerid).isCurrent());
-		this.diceLabel.setText("Turn: " + game.getTurnNumber());
+		if (!game.getCurrentPlayer().equals(this.game.getPlayers().get(this.playerid))) {
+			setMessageLabel(s);
+			isCurrentPlayer(game.getPlayers().get(this.playerid).isCurrent());
+		}else{
+			this.diceLabel.setText("Turn: " + game.getTurnNumber());
+			setMessageLabel(String.valueOf(this.game.getPlayers().get(this.playerid)));
+		}
 	}
 
 	class ThrowDicesHandler implements EventHandler<ActionEvent> {

@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
-		new ScoreView();
+		ScoreView sc = new  ScoreView();
 		Game game = new Game();
 		PlayerFactory p = new PlayerFactory();
 		game.addPlayer(p.createPlayer(1, "John"));
@@ -21,9 +21,10 @@ public class Main extends Application {
 		PlayerView pv2 = new PlayerView(2, game);
 		PlayerView pv1 = new PlayerView(1, game);
 		pv1.isCurrentPlayer(true);
-		game.addObserver(EventType.ADD,pv1);
-		game.addObserver(EventType.ADD,pv2);
-		game.addObserver(EventType.ADD,pv3);
+		game.addObserver(EventType.PLAYERVIEW,pv1);
+		game.addObserver(EventType.PLAYERVIEW,pv2);
+		game.addObserver(EventType.PLAYERVIEW,pv3);
+		game.addObserver(EventType.SCOREVIEW,sc);
 	}
 	
 	public static void main(String[] args) {

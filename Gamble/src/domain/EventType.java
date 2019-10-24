@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum EventType {
-    ADD(new ArrayList<>()),
-    DEPOSIT(new ArrayList<>());
+    PLAYERVIEW(new ArrayList<>()),
+    SCOREVIEW(new ArrayList<>());
 
     private List<Observer> observers;
 

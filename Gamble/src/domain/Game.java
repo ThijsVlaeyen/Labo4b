@@ -19,7 +19,7 @@ public class Game implements Subject{
         turns = new HashMap<>();
         observers = new HashMap<>();
         dice = new Dice();
-        turnNumber = 0;
+        turnNumber = 1;
         listOfTurns = new ArrayList<>();
     }
 
@@ -72,7 +72,7 @@ public class Game implements Subject{
             Player p2 = playerQueue.peek();
             p2.setCurrent(true);
             setTurn();
-            notifyObserver(EventType.ADD, t.toString());
+            notifyObserver(EventType.PLAYERVIEW, t.toString());
         }else{
             System.out.println("already played 4 rounds - game over");
         }
@@ -88,8 +88,24 @@ public class Game implements Subject{
         //else endGame();
     }
 
+    private String getScoreViewString() {
+        String result ="";
+        for (Map.Entry<Player,List<Turn>> entry:this.turns.entrySet()) {
+            int sum =0;
+            for (Turn t:entry.getValue()) {
+                sum += t.getScore();
+            }
+            result += entry.getKey().getName() + "" + sum + " ";
+        }
+        return result;
+    }
+
     public int getTurnNumber() {
         return turnNumber;
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
     }
 
     private void setTurn() {
@@ -98,6 +114,9 @@ public class Game implements Subject{
             if (max>entry.getValue().size()){
                 max = entry.getValue().size();
             }
+        }
+        if (this.turnNumber != max+1){
+            notifyObserver(EventType.SCOREVIEW,getScoreViewString());
         }
         this.turnNumber = max+1;
     }
