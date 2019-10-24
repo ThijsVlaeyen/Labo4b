@@ -10,8 +10,9 @@ public class Dice {
 
     public List<Integer> throwDices(int count) {
         List<Integer> listToReturn = new ArrayList<Integer>();
-        listToReturn.add((int) (Math.random()*6+1));
-        listToReturn.add((int) (Math.random()*6+1));
+        for (int i = 0; i <count ; i++) {
+            listToReturn.add(throwDice());
+        }
         return listToReturn;
     }
 }
