@@ -1,5 +1,6 @@
 package ui;
 
+import domain.Observer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -8,7 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class PlayerView  {
+public class PlayerView implements Observer {
 	private Stage stage = new Stage();
 	private Scene playerScene;
 	private Label diceLabel; 
@@ -44,7 +45,16 @@ public class PlayerView  {
 	public void isCurrentPlayer(boolean turn){
 		playButton.setDisable(!turn);
 	}
-	
+
+	public void setMessageLabel(String text){
+		this.messageLabel.setText(text);
+	}
+
+	@Override
+	public void update(String s) {
+		setMessageLabel(s);
+	}
+
 	class ThrowDicesHandler implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
