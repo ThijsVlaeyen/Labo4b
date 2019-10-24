@@ -28,7 +28,7 @@ public class ScoreView {
 		root.getChildren().add(scoreLabel);
 	}
 	
-	private void voegScoreLijnToe(String scoreLijn){
+	private void addScoreLine(String scoreLijn){
 		scoreLabel.setText(scoreLabel.getText()+"\n"+scoreLijn);
 	}
 	
