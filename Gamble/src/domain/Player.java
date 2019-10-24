@@ -3,6 +3,7 @@ package domain;
 public class Player {
     private Integer playerId;
     private String name;
+    private Dice dice;
 
     public Player(Integer playerId,String name){
         this.playerId = playerId;

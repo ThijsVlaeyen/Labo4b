@@ -8,10 +8,17 @@ import java.util.Map;
 public class Game implements Subject{
     private Map<Player, List<Turn>> players;
     private Map<EventType, List<Observer>> observers;
+    private Dice dice;
+    List<Integer> dices;
 
     public Game() {
         players = new HashMap<Player, List<Turn>>();
         observers = new HashMap<EventType, List<Observer>>();
+        dice = new Dice();
+    }
+
+    public void addPlayer(Player p) {
+        players.put(p, new ArrayList<Turn>());
     }
 
     @Override
@@ -33,7 +40,8 @@ public class Game implements Subject{
 
     public void startGame() {
         for (int i=0; i<4; i++) {
-            //players
+            for (Player player : players.keySet())
+                dices = dice.throwDices(2);
         }
     }
 }
