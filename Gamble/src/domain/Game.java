@@ -30,4 +30,10 @@ public class Game implements Subject{
             o.update(s);
         }
     }
+
+    public void startGame() {
+        for (int i=0; i<4; i++) {
+            //players
+        }
+    }
 }

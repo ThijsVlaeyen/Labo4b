@@ -1,5 +1,6 @@
 package ui;
 	
+import domain.Game;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -11,6 +12,8 @@ public class Main extends Application {
 		PlayerView pv2 = new PlayerView(2);
 		PlayerView pv1 = new PlayerView(1);		
 		pv1.isCurrentPlayer(true);
+		Game game = new Game();
+		game.startGame();
 	}
 	
 	public static void main(String[] args) {
