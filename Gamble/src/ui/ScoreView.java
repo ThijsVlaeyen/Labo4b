@@ -1,5 +1,6 @@
 package ui;
 
+import domain.Game;
 import domain.Observer;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;

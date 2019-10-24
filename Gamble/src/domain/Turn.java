@@ -3,9 +3,11 @@ package domain;
 import java.util.List;
 
 public class Turn {
+    private Player player;
     private int dice1, dice2, previousScore, score;
 
-    public Turn(int dice1, int dice2, int previousScore) {
+    public Turn(Player p,int dice1, int dice2, int previousScore) {
+        this.player = p;
         this.dice1 = dice1;
         this.dice2 = dice2;
         this.previousScore = previousScore;
@@ -20,5 +22,10 @@ public class Turn {
 
     public int getScore() {
         return score;
+    }
+
+    @Override
+    public String toString() {
+        return this.player.toString() + " " + dice1 + " + " + dice2;
     }
 }
