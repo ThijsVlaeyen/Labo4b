@@ -119,6 +119,9 @@ public class Game implements Subject{
             notifyObserver(EventType.SCOREVIEW,getScoreViewString());
         }
         this.turnNumber = max+1;
+        if (this.turnNumber == 5){
+            endGame();
+        }
     }
 
     public void endGame() {
@@ -127,7 +130,7 @@ public class Game implements Subject{
 
     private String getWinningPlayer() {
         int max = 0;
-        int som =0;
+        int som;
         Player p = null;
         for (Map.Entry<Player,List<Turn>> entry:this.turns.entrySet()) {
             som = 0;
@@ -139,6 +142,6 @@ public class Game implements Subject{
                 max = som;
             }
         }
-        return " de winnaar is " + p.toString() + " met een score van " + max;
+        return "the winner is " + p.toString() + " with a score of " + max;
     }
 }
