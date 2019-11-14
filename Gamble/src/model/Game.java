@@ -1,11 +1,14 @@
-package domain;
+package model;
+
+import domain.*;
+import domain.Observer;
 
 import java.util.*;
 
-public class Game implements Subject{
+public class Game implements Subject {
     private Map<Integer, Player> players;
     private Map<Player, List<Turn>> turns;
-    private Map<EventType, List<Observer>> observers;
+    private Map<EventType, List<domain.Observer>> observers;
     private Dice dice;
     private List<Integer> dices;
     private Queue<Player> playerQueue = new LinkedList<>();
@@ -34,19 +37,19 @@ public class Game implements Subject{
     }
 
     @Override
-    public void addObserver(EventType e, Observer o) {
+    public void addObserver(EventType e, domain.Observer o) {
         if (observers.get(e) == null){
-            List<Observer> observers = new ArrayList<>();
+            List<domain.Observer> observers = new ArrayList<>();
             observers.add(o);
             this.observers.put(e,observers);
         }else{
-            List<Observer> observers = this.observers.get(e);
+            List<domain.Observer> observers = this.observers.get(e);
             observers.add(o);
         }
     }
 
     @Override
-    public void removeObserver(EventType e, Observer o) {
+    public void removeObserver(EventType e, domain.Observer o) {
         this.observers.get(e).remove(o);
     }
 
@@ -88,7 +91,7 @@ public class Game implements Subject{
         //else endGame();
     }
 
-    private String getScoreViewString() {
+    public String getScoreViewString() {
         String result ="";
         for (Map.Entry<Player,List<Turn>> entry:this.turns.entrySet()) {
             int sum =0;

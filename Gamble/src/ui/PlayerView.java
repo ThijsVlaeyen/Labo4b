@@ -1,6 +1,7 @@
 package ui;
 
-import domain.Game;
+import controller.PlayerController;
+import model.Game;
 import domain.Observer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,19 +11,21 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class PlayerView implements Observer {
+public class PlayerView  {
 	private Stage stage = new Stage();
 	private Scene playerScene;
 	private Label diceLabel; 
 	private Button playButton; 
 	private Label messageLabel;
 	private Game game;
-	
+	private PlayerController controller;
+
 	private int playerid;
 	
-	public PlayerView(int playerid, Game game){
-		this.playerid = playerid;
-		this.game = game;
+	public PlayerView(PlayerController controller){
+		this.controller = controller;
+		controller.setView(this);
+		this.playerid = controller.getPlayerid();
 		diceLabel = new Label("turn 1: ");
 		playButton = new Button("throw dice");
 		playButton.setOnAction(new ThrowDicesHandler());
@@ -53,23 +56,15 @@ public class PlayerView implements Observer {
 		this.messageLabel.setText(text);
 	}
 
-	@Override
-	public void update(String s) {
-		if (!game.getCurrentPlayer().equals(this.game.getPlayers().get(this.playerid))) {
-			setMessageLabel(s);
-			isCurrentPlayer(game.getPlayers().get(this.playerid).isCurrent());
-		}else{
-			this.diceLabel.setText("Turn: " + game.getTurnNumber());
-			setMessageLabel(String.valueOf(this.game.getPlayers().get(this.playerid)));
-		}
+	public void setDiceLabel(String message){
+		this.diceLabel.setText(message);
 	}
+
 
 	class ThrowDicesHandler implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
-            game.step(playerid);
-            isCurrentPlayer(false);
-            game.getPlayers().get(playerid).setCurrent(false);
+        	controller.stepButtonPressed();
         }
     }
 }
